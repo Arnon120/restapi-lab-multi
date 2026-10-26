@@ -6,7 +6,10 @@ import org.springframework.web.client.RestClient;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 public class JsonPlaceholderUserService {
@@ -28,5 +31,11 @@ public class JsonPlaceholderUserService {
                 .orElse(new JsonPlaceholderUser[]{});
 
         return Arrays.asList(users);
+    }
+
+    // Get all, keyed by id
+    public Map<Long, JsonPlaceholderUser> getUsersByID() {
+        return getUsers().stream().collect(
+                Collectors.toMap(JsonPlaceholderUser::getId, Function.identity()));
     }
 }
