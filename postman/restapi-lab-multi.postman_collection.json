@@ -1,0 +1,56 @@
+{
+  "info": {
+    "name": "restapi-lab-multi",
+    "description": "Lab - Data Sources Orchestration. Start MongoDB and the Spring Boot app first.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080" }
+  ],
+  "item": [
+    {
+      "name": "Get all persons",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Accept", "value": "application/json" }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/persons",
+          "host": ["{{baseUrl}}"],
+          "path": ["persons"]
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+              "",
+              "const persons = pm.response.json();",
+              "",
+              "pm.test('Returns the two merged persons', () => {",
+              "    pm.expect(persons).to.be.an('array').with.lengthOf(2);",
+              "});",
+              "",
+              "pm.test('Each person has id, name, email, phone and address', () => {",
+              "    persons.forEach(p => {",
+              "        pm.expect(p).to.include.keys('id', 'name', 'email', 'phone', 'address');",
+              "        pm.expect(p.address).to.include.keys('city');",
+              "    });",
+              "});",
+              "",
+              "pm.test('Person 1 is Leanne Graham from London', () => {",
+              "    const p = persons.find(x => x.id === 1);",
+              "    pm.expect(p.name).to.eql('Leanne Graham');",
+              "    pm.expect(p.address.city).to.eql('London');",
+              "});"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

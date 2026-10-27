@@ -1,0 +1,9 @@
+services:
+  mongo:
+    image: mongo:8.0
+    container_name: restapi-lab-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      # Scripts in this folder run once, when the container is first created with an empty data volume
+      - ./src/main/resources/mongo:/docker-entrypoint-initdb.d:ro
