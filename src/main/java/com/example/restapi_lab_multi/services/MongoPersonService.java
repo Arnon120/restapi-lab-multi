@@ -21,10 +21,10 @@ public class MongoPersonService {
         return mongoPersonsRepository.findAll();
     }
 
-    // Get all, keyed by id
+    // Get all, keyed by externalId (the user id; _id is Mongo's own ObjectId)
     public Map<Long, MongoPerson> getMongoPersonsById() {
         return getMongoPersons().stream().collect(
-                Collectors.toMap(MongoPerson::getId, Function.identity()));
+                Collectors.toMap(MongoPerson::getExternalId, Function.identity()));
     }
 
 }

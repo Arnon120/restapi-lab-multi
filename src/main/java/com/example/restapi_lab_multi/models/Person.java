@@ -1,5 +1,6 @@
 package com.example.restapi_lab_multi.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,7 +19,8 @@ public class Person {
     @AllArgsConstructor
     public static class Address{
         private String city;
-        private String Country;
+        @JsonProperty("Country")
+        private String country;
     }
 
     private Long id;
@@ -28,7 +30,7 @@ public class Person {
     private Address address;
 
     public static Person FromMembers(JsonPlaceholderUser jsonPlaceholderUser, MongoPerson mongoPerson, Phone phone) {
-        assert Objects.equals(jsonPlaceholderUser.getId(), mongoPerson.getId());
+        assert Objects.equals(jsonPlaceholderUser.getId(), mongoPerson.getExternalId());
         assert Objects.equals(jsonPlaceholderUser.getId(), phone.getId());
         return Person
                 .builder()
@@ -39,7 +41,7 @@ public class Person {
                 .address(Address
                         .builder()
                         .city(mongoPerson.getCity())
-                        .Country(mongoPerson.getCountry())
+                        .country(mongoPerson.getCountry())
                         .build()
                         )
                 .build();
