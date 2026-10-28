@@ -28,7 +28,7 @@ public class PersonsService {
         commonIds.retainAll(mongoPeople.keySet());
         commonIds.retainAll(phones.keySet());
         return commonIds.stream()
-                .map(id -> Person.FromMembers(jsonPlaceholderUsers.get(id), mongoPeople.get(id), phones.get(id)))
+                .map(id -> PersonMapper.toPerson(jsonPlaceholderUsers.get(id), mongoPeople.get(id), phones.get(id)))
                 .toList();
     }
 }
