@@ -1,6 +1,7 @@
 package com.example.restapi_lab_multi.services;
 
 import com.example.restapi_lab_multi.models.JsonPlaceholderUser;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
@@ -15,8 +16,8 @@ import java.util.stream.Collectors;
 public class JsonPlaceholderUserService {
     private final RestClient restClient;
 
-    public JsonPlaceholderUserService() {
-        this.restClient = RestClient.builder().baseUrl("https://jsonplaceholder.typicode.com").build();
+    public JsonPlaceholderUserService(@Value("${jsonplaceholder.base-url}") String baseUrl) {
+        this.restClient = RestClient.builder().baseUrl(baseUrl).build();
     }
 
     // Get All
