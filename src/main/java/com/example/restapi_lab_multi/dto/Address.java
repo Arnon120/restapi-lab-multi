@@ -1,4 +1,4 @@
-package com.example.restapi_lab_multi.models;
+package com.example.restapi_lab_multi.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
