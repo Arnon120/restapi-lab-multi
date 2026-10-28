@@ -1,5 +1,6 @@
-package com.example.restapi_lab_multi.dto;
+package com.example.restapi_lab_multi.services;
 
+import com.example.restapi_lab_multi.dto.Person;
 import com.example.restapi_lab_multi.models.JsonPlaceholderUser;
 import com.example.restapi_lab_multi.models.MongoPerson;
 import com.example.restapi_lab_multi.models.Phone;
@@ -8,13 +9,13 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class PersonTest {
+class PersonMapperTest {
 
     private final JsonPlaceholderUser user = new JsonPlaceholderUser(1L, "Leanne Graham", "leanne@example.com");
 
     @Test
-    void fromMembersJoinsMatchingIds() {
-        Person person = Person.FromMembers(user, new MongoPerson("abc", 1L, "Tel Aviv", "Israel"), new Phone(1L, "050-1234567"));
+    void toPersonJoinsMatchingIds() {
+        Person person = PersonMapper.toPerson(user, new MongoPerson("abc", 1L, "Tel Aviv", "Israel"), new Phone(1L, "050-1234567"));
 
         assertEquals(1L, person.getId());
         assertEquals("050-1234567", person.getPhone());
@@ -22,20 +23,20 @@ class PersonTest {
     }
 
     @Test
-    void fromMembersRejectsMismatchedMongoId() {
+    void toPersonRejectsMismatchedMongoId() {
         assertThrows(IllegalArgumentException.class,
-                () -> Person.FromMembers(user, new MongoPerson("abc", 2L, "Tel Aviv", "Israel"), new Phone(1L, "050-1234567")));
+                () -> PersonMapper.toPerson(user, new MongoPerson("abc", 2L, "Tel Aviv", "Israel"), new Phone(1L, "050-1234567")));
     }
 
     @Test
-    void fromMembersRejectsMismatchedPhoneId() {
+    void toPersonRejectsMismatchedPhoneId() {
         assertThrows(IllegalArgumentException.class,
-                () -> Person.FromMembers(user, new MongoPerson("abc", 1L, "Tel Aviv", "Israel"), new Phone(2L, "050-1234567")));
+                () -> PersonMapper.toPerson(user, new MongoPerson("abc", 1L, "Tel Aviv", "Israel"), new Phone(2L, "050-1234567")));
     }
 
     @Test
-    void fromMembersRejectsMissingMember() {
+    void toPersonRejectsMissingMember() {
         assertThrows(NullPointerException.class,
-                () -> Person.FromMembers(user, null, new Phone(1L, "050-1234567")));
+                () -> PersonMapper.toPerson(user, null, new Phone(1L, "050-1234567")));
     }
 }
