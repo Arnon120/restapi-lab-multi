@@ -35,7 +35,7 @@ class JsonPlaceholderUserService {
     }
 
     // Get all, keyed by id
-    Map<Long, JsonPlaceholderUser> getUsersByID() {
+    Map<Long, JsonPlaceholderUser> getUsersById() {
         return getUsers().stream().collect(
                 Collectors.toMap(JsonPlaceholderUser::getId, Function.identity()));
     }
