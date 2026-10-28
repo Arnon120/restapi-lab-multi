@@ -1,7 +1,7 @@
 package com.example.restapi_lab_multi.services;
 
 import com.example.restapi_lab_multi.models.MongoPerson;
-import com.example.restapi_lab_multi.repository.MongoPersonsRepository;
+import com.example.restapi_lab_multi.repositories.MongoPersonsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
