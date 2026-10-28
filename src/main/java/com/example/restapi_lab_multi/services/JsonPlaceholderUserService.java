@@ -13,15 +13,15 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
-public class JsonPlaceholderUserService {
+class JsonPlaceholderUserService {
     private final RestClient restClient;
 
-    public JsonPlaceholderUserService(@Value("${jsonplaceholder.base-url}") String baseUrl) {
+    JsonPlaceholderUserService(@Value("${jsonplaceholder.base-url}") String baseUrl) {
         this.restClient = RestClient.builder().baseUrl(baseUrl).build();
     }
 
     // Get All
-    public List<JsonPlaceholderUser> getUsers() {
+    private List<JsonPlaceholderUser> getUsers() {
         JsonPlaceholderUser[] users = Optional
                 .ofNullable(restClient
                     .get()
@@ -35,7 +35,7 @@ public class JsonPlaceholderUserService {
     }
 
     // Get all, keyed by id
-    public Map<Long, JsonPlaceholderUser> getUsersByID() {
+    Map<Long, JsonPlaceholderUser> getUsersByID() {
         return getUsers().stream().collect(
                 Collectors.toMap(JsonPlaceholderUser::getId, Function.identity()));
     }
