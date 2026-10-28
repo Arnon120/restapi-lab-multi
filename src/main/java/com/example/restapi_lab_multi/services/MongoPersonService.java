@@ -14,15 +14,15 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class MongoPersonService {
+class MongoPersonService {
     private final MongoPersonsRepository mongoPersonsRepository;
 
-    public List<MongoPerson> getMongoPersons() {
+    private List<MongoPerson> getMongoPersons() {
         return mongoPersonsRepository.findAll();
     }
 
     // Get all, keyed by externalId (the user id; _id is Mongo's own ObjectId)
-    public Map<Long, MongoPerson> getMongoPersonsById() {
+    Map<Long, MongoPerson> getMongoPersonsById() {
         return getMongoPersons().stream().collect(
                 Collectors.toMap(MongoPerson::getExternalId, Function.identity()));
     }
