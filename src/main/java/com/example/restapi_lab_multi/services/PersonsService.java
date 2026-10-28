@@ -20,7 +20,7 @@ public class PersonsService {
     private final PhonesService phonesService;
 
     public List<Person> getPersons() {
-        Map<Long, JsonPlaceholderUser> jsonPlaceholderUsers = jsonPlaceholderUserService.getUsersByID();
+        Map<Long, JsonPlaceholderUser> jsonPlaceholderUsers = jsonPlaceholderUserService.getUsersById();
         Map<Long, MongoPerson> mongoPeople = mongoPersonService.getMongoPersonsById();
         Map<Long, Phone> phones = phonesService.getPhoneById();
 
