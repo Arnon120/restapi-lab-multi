@@ -14,24 +14,24 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
-public class PhonesService {
+class PhonesService {
     private final Path filePath;
 
     private final JsonMapper jsonMapper;
 
-    public PhonesService(@Value("${phones.file-path}") Path filePath, JsonMapper jsonMapper) {
+    PhonesService(@Value("${phones.file-path}") Path filePath, JsonMapper jsonMapper) {
         this.filePath = filePath;
         this.jsonMapper = jsonMapper;
     }
 
     // Get all
-    public List<Phone> getPhones() {
+    private List<Phone> getPhones() {
         JsonNode persons = jsonMapper.readTree(filePath.toFile()).get("persons");
         return Arrays.asList(jsonMapper.treeToValue(persons, Phone[].class));
     }
 
     // Get all, keyed by id
-    public Map<Long, Phone> getPhoneById() {
+    Map<Long, Phone> getPhoneById() {
         return getPhones().stream().collect(
                 Collectors.toMap(Phone::getId, Function.identity()));
     }
