@@ -15,8 +15,15 @@ public class Person {
     Address address;
 
     public static Person FromMembers(JsonPlaceholderUser jsonPlaceholderUser, MongoPerson mongoPerson, Phone phone) {
-        assert Objects.equals(jsonPlaceholderUser.getId(), mongoPerson.getExternalId());
-        assert Objects.equals(jsonPlaceholderUser.getId(), phone.getId());
+        Objects.requireNonNull(jsonPlaceholderUser, "jsonPlaceholderUser");
+        Objects.requireNonNull(mongoPerson, "mongoPerson");
+        Objects.requireNonNull(phone, "phone");
+        Long id = jsonPlaceholderUser.getId();
+        if (!Objects.equals(id, mongoPerson.getExternalId()) || !Objects.equals(id, phone.getId())) {
+            throw new IllegalArgumentException("Mismatched ids: user=" + id
+                    + ", mongoPerson.externalId=" + mongoPerson.getExternalId()
+                    + ", phone=" + phone.getId());
+        }
         return Person
                 .builder()
                 .id(jsonPlaceholderUser.getId())
