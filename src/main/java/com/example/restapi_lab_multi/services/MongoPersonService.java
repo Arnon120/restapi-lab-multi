@@ -1,6 +1,5 @@
 package com.example.restapi_lab_multi.services;
 
-import com.example.restapi_lab_multi.models.JsonPlaceholderUser;
 import com.example.restapi_lab_multi.models.MongoPerson;
 import com.example.restapi_lab_multi.repository.MongoPersonsRepository;
 import lombok.RequiredArgsConstructor;
