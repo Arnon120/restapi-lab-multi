@@ -1,6 +1,6 @@
 package com.example.restapi_lab_multi.controllers;
 
-import com.example.restapi_lab_multi.models.Person;
+import com.example.restapi_lab_multi.dto.Person;
 import com.example.restapi_lab_multi.services.PersonsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

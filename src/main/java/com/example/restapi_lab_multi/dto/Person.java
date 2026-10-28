@@ -1,5 +1,8 @@
-package com.example.restapi_lab_multi.models;
+package com.example.restapi_lab_multi.dto;
 
+import com.example.restapi_lab_multi.models.JsonPlaceholderUser;
+import com.example.restapi_lab_multi.models.MongoPerson;
+import com.example.restapi_lab_multi.models.Phone;
 import lombok.Builder;
 import lombok.Value;
 
